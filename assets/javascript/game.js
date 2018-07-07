@@ -73,10 +73,15 @@ var rpg = (function () {
         },
 
         selectPlayer: function (arg) {
+            console.log(arg);
+            console.log(arg.target.outerHTML);
             private.characterChosen = true;
             private.player = arg.target.id;
-            $(".playerfield").append()
+            $("div.players").hide();
+            $(".playerfield").append(arg.target.outerHTML);
             this.battlefield(arg.target.id);
+            
+            
         
         },
 
