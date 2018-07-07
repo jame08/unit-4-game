@@ -19,7 +19,7 @@ var rpg = (function () {
 
             darkV = {
                 name: "vader",
-                image: "<img src = 'assets/images/darkvader.jpg' id = 'vader' class = 'ml-1 mr-1' onclick='rpg.selectPlayer(event)'>",
+                image: "<img src = 'assets/images/darkvader.jpg' id = 'vader' class = 'ml-1 mr-1 var' onclick='rpg.selectPlayer(event)'> ",
                 opImage: "<img src = 'assets/images/darkvader.jpg' id = 'vader' class = 'ml-1 mr-1' onclick='rpg.selectOponent(event)'>",
                 counterAttack: 5,
                 attack: 5,
@@ -29,8 +29,8 @@ var rpg = (function () {
 
             lukeS = {
                 name: "luke",
-                image: " <img src = 'assets/images/lukesky.jpg' id = 'luke' class = 'ml-1 mr-1' onclick='rpg.selectPlayer(event)'>",
-                opImage: "<img src = 'assets/images/lukesky.jpg' id = 'luke' class = 'ml-1 mr-1' onclick='rpg.selectOponent(event)'>",
+                image: "<img src = 'assets/images/lukesky.jpg' id = 'luke' class = 'ml-1 mr-1 var' onclick='rpg.selectPlayer(event)'> ",
+                opImage: "<img src = 'assets/images/lukesky.jpg' id = 'luke' class = 'ml-1 mr-1 ' onclick='rpg.selectOponent(event)'>",
                 counterAttack: 6,
                 attack: 6,
                 health: 80,
@@ -39,7 +39,7 @@ var rpg = (function () {
 
             sith = {
                 name: "sith",
-                image: "<img src = 'assets/images/sith.jpg' id = 'sith' class = 'ml-1 mr-1' onclick='rpg.selectPlayer(event)'>",
+                image: "<img src = 'assets/images/sith.jpg' id = 'sith' class = 'ml-1 mr-1 var' onclick='rpg.selectPlayer(event)'>",
                 opImage: "<img src = 'assets/images/sith.jpg' id = 'sith' class = 'ml-1 mr-1' onclick='rpg.selectOponent(event)'>",
                 counterAttack: 8,
                 attack: 8,
@@ -49,7 +49,7 @@ var rpg = (function () {
 
             oviwan = {
                 name: "obiWan",
-                image: "<img src = 'assets/images/oviwan.jpg' id = 'obiWan' class = 'ml-1 mr-1' onclick='rpg.selectPlayer(event)'>",
+                image: "<img src = 'assets/images/oviwan.jpg' id = 'obiWan' class = 'ml-1 mr-1 var' onclick='rpg.selectPlayer(event)'>",
                 opImage: "<img src = 'assets/images/oviwan.jpg' id = 'obiWan' class = 'ml-1 mr-1' onclick='rpg.selectOponent(event)'>",
                 counterAttack: 10,
                 attack: 10,
@@ -67,10 +67,12 @@ var rpg = (function () {
 
         init: function () {
 
+
             private.characters.forEach(player => {
 
-                $(".init").append(player.image);
-
+                var stats = "<div class = 'bottom-right'>" + " AP " + player.attack + " HP " + player.health + " </div> ";
+                $(".init").append("<div class = 'cont'> "+ player.image +  stats +"</div>");
+            
             })
 
         },
@@ -81,6 +83,8 @@ var rpg = (function () {
                 private.enemies = private.characters.filter(x => x.name != arg.target.id);
                 $("div.players").hide();
                 $(".playerfield").html(arg.target.outerHTML);
+
+
                 this.battlefield(private.enemies);
                  
             }     
@@ -116,6 +120,7 @@ var rpg = (function () {
 
         attackOponent: function () {
 
+   
         },
 
 
@@ -123,6 +128,15 @@ var rpg = (function () {
         reset: function () {
 
         },
+
+        // setdefender: function(arg) {
+
+        //     private.defender = arg;
+        // },
+        // getdefender: function(){
+        //     return private.defender;
+        // }
+
 
        
 

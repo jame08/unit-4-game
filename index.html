@@ -17,23 +17,25 @@
 
 
 
-    <div class="container">
+    <div class="container ">
 
-        <div class="container">
+        
 
             <div class="row">
                 <h1 class="text-monospace h1"> Star Wars RPG !</h1>
             </div>
 
-        </div>
+       
 
         <div class="row">
 
             <div class="col-md-8 test">
 
-                <div class="row players">
+                <div class="row init">
 
-                    <div class="init"></div>
+                    <!-- <div class="init"></div>
+                    <div class="info"></div> -->
+               
 
                 </div>
             </div>
@@ -91,6 +93,12 @@
     $(document).ready(function () {
 
         rpg.init();
+
+             $(".btn").on("click", function(){
+            console.log(rpg.getdefender());
+        $(".defenderfield").empty();
+        rpg.setdefender(false);
+        });
 
 
     })
