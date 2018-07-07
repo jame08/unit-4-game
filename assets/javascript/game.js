@@ -4,13 +4,16 @@ var rpg = (function () {
 
     var private = {
 
-        player: "",
+        player: null,
+        enemies:[],
         characterChosen: false,
         enemyChosen: false,
         opponent: 0,
-
         defeated: false,
         bfchosen: false,
+        defender: false,
+
+        enemies:[],
 
         characters: [
 
@@ -27,7 +30,7 @@ var rpg = (function () {
             lukeS = {
                 name: "luke",
                 image: " <img src = 'assets/images/lukesky.jpg' id = 'luke' class = 'ml-1 mr-1' onclick='rpg.selectPlayer(event)'>",
-                opImage: "<img src = 'assets/images/lukesky.jpg' id = 'vader' class = 'ml-1 mr-1' onclick='rpg.selectOponent(event)'>",
+                opImage: "<img src = 'assets/images/lukesky.jpg' id = 'luke' class = 'ml-1 mr-1' onclick='rpg.selectOponent(event)'>",
                 counterAttack: 6,
                 attack: 6,
                 health: 80,
@@ -37,7 +40,7 @@ var rpg = (function () {
             sith = {
                 name: "sith",
                 image: "<img src = 'assets/images/sith.jpg' id = 'sith' class = 'ml-1 mr-1' onclick='rpg.selectPlayer(event)'>",
-                opImage: "<img src = 'assets/images/sith.jpg' id = 'vader' class = 'ml-1 mr-1' onclick='rpg.selectOponent(event)'>",
+                opImage: "<img src = 'assets/images/sith.jpg' id = 'sith' class = 'ml-1 mr-1' onclick='rpg.selectOponent(event)'>",
                 counterAttack: 8,
                 attack: 8,
                 health: 60,
@@ -47,7 +50,7 @@ var rpg = (function () {
             oviwan = {
                 name: "obiWan",
                 image: "<img src = 'assets/images/oviwan.jpg' id = 'obiWan' class = 'ml-1 mr-1' onclick='rpg.selectPlayer(event)'>",
-                opImage: "<img src = 'assets/images/oviwan.jpg' id = 'vader' class = 'ml-1 mr-1' onclick='rpg.selectOponent(event)'>",
+                opImage: "<img src = 'assets/images/oviwan.jpg' id = 'obiWan' class = 'ml-1 mr-1' onclick='rpg.selectOponent(event)'>",
                 counterAttack: 10,
                 attack: 10,
                 health: 40,
@@ -64,24 +67,23 @@ var rpg = (function () {
 
         init: function () {
 
+            private.characters.forEach(player => {
 
-            for (var i = 0; i <= private.characters.length; i++) {
+                $(".init").append(player.image);
 
-                $(".init").append(private.characters[i].image);
-
-            }
+            })
 
         },
 
         selectPlayer: function (arg) {
-            if (private.characterChosen === false && private.bfchosen === false) {
-                private.player = arg.target.id;
+            if (private.player === null) {
+                private.player = private.characters.find(x => x.name === arg.target.id);
+                private.enemies = private.characters.filter(x => x.name != arg.target.id);
                 $("div.players").hide();
                 $(".playerfield").html(arg.target.outerHTML);
-                this.battlefield(arg.target.id);
-                private.opponent = 3;
-
-            }
+                this.battlefield(private.enemies);
+                 
+            }     
 
         },
 
@@ -89,31 +91,26 @@ var rpg = (function () {
 
         selectOponent: function (arg) {
 
-        if(private.characterChosen ===true && private.bfchosen === true){
+            console.log(arg.target.id);
+           
+        if(private.player != null && private.defender === false){
+            private.defender =true;
+
+            private.enemies = private.enemies.filter(x => x.name != arg.target.id);
+            $(".defenderfield").html(arg.target.outerHTML);
+            console.log(private.enemies);
+            private.defender =true;
             
-
-            
-
-        
-
-
+            $(".enemiesfield").empty();
+            this.battlefield();
         }
-
-
 
         },
 
         battlefield: function (arg) {
-            console.log(arg);
-            if (private.bfchosen == false) {
-                for (var i = 0; i <= private.characters.length; i++) {
-                    if (private.characters[i].name !== arg) {
-                        $(".enemiesfield").append(private.characters[i].image);
-                    }
-                    
-                    private.bfchosen = true;
-                }
-            }
+             private.enemies.forEach(enemies => {
+            $(".enemiesfield").append(enemies.opImage);
+         } )
 
         },
 
@@ -125,7 +122,9 @@ var rpg = (function () {
 
         reset: function () {
 
-        }
+        },
+
+       
 
 
 
