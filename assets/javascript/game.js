@@ -1,92 +1,129 @@
 
 
-var rpg = (function(){
-   
-var logic = (function() {
-        
-        var character;
-        var characterChosen;
-        var enemyChosen = false;
-        var opponent;
-        var defeated = false; 
+var rpg = (function () {
 
-        var characters = [
+    var private = {
+
+        player:"",
+        characterChosen: false,
+        enemyChosen: false,
+        opponent:0,
+        defeated :false,
+        bfchosen: false,
+
+        characters: [
+
             darkV = {
-                name: "Dark Vader",
-                image: "<img src = '../images/darkvader.jpg' id = 'Vader'>",
+                name: "vader",
+                image: "<img src = 'assets/images/darkvader.jpg' id = 'vader' class = 'ml-1 mr-1'>",
                 counterAttack: 5,
                 attack: 5,
                 health: 50,
-           
+
             },
-        
+
             lukeS = {
-                name: "Luke Skywalker",
-                image: "<img src = 'assets/images/lukesky.jpg' id = 'Luke'>",
+                name: "luke",
+                image: "<img src = 'assets/images/lukesky.jpg' id = 'luke' class = 'ml-1 mr-1 players'>",
                 counterAttack: 6,
                 attack: 6,
                 health: 80,
-             
+
             },
-        
+
             sith = {
-                name: "Sith",
-                image: "<img src = 'assets/images/sith.jpg' id = 'Sith'>",
+                name: "sith",
+                image: "<img src = 'assets/images/sith.jpg' id = 'sith' class = 'ml-1 mr-1'>",
                 counterAttack: 8,
                 attack: 8,
                 health: 60,
-                
+
             },
-        
+
             oviwan = {
-                name: "Ovi-wan Kanovi",
-                image: "<img src = 'assets/images/oviwan.jpg' id = 'Ovi-Wan'>",
-                counterAttack: 10, 
+                name: "obiWan",
+                image: "<img src = 'assets/images/oviwan.jpg' id = 'obiWan' class = 'ml-1 mr-1'>",
+                counterAttack: 10,
                 attack: 10,
                 health: 40,
-                
+
             }
-        ];
+        ],
 
         //private functions 
-
-
-    })
-
-        return {
-
-          init: function(){
-              
-
-
-          },
-
-          selectChar: function(arg) {
-
-          },
-
-          selectOpo: function(arg){
-
-
-          },
-
-          attackOp: function(){
-
-          },
-
-          reset: function(){
-
-          }
-
-
-
-          
-        };
-
-
-    })();
-
         
+    };
+
+    return {
+
+
+        init: function ()  {
+
+            console.log(private.characters);
+
+        // for (var i= 0;i<= private.characters.length;i++){
+
+        // // $("#init").append("<buttom id='close-image players'>"+private.characters[i].image+"</buttom>");
+        // // $("#init").append(private.characters[i].image);
+
+
+
+        //  }
+
+        },
+
+        selectPlayer: function (arg) {
+            private.characterChosen = true;
+            private.player = arg.target.id;
+            $(".playerfield").append()
+            this.battlefield(arg.target.id);
+        
+        },
+
+
+
+        selectOponent: function (arg) {
+            
+        },
+
+        battlefield: function(arg){
+            console.log(arg);
+            if( private.bfchosen == false){
+           for(var i=0; i<= private.characters.length; i++){
+               if(private.characters[i].name !== arg){
+                   $(".enemiesfield").append(private.characters[i].image);
+               }
+
+            private.bfchosen = true;
+           }
+        }
+
+        },
+
+        attackOponent: function () {
+
+        },
+
+
+
+        reset: function () {
+           
+        }
+
+
+
+
+    };
+
+ 
+
+})();
+
+
+
+
+
+
 
 
 

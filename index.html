@@ -4,14 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>RPG GAME</title>
-
-    <!-- Added link to the jQuery Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <!-- Added a link to Bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/reset.css">
+    <script type="text/javascript" src="assets/javascript/game.js"></script>
 
 </head>
 
@@ -35,12 +32,10 @@
             <div class="col-md-8 test">
                 <div class="container players">
                     <div class="row">
-
-                        <!-- <img class="player1 .img-thumbnail image float-left ml-1 mr-1" src="assets/images/darkvader.jpg" alt="Dark Vader">
-                        <img class="player2 .img-thumbnail image float-left ml-1 mr-1" src="assets/images/oviwan.jpg" alt="Ovi-Wan">
-                        <img class="player3 .img-thumbnail image float-left ml-1 mr-1" src="assets/images/sith.jpg" alt="Sith">
-                        <img class="player4 .img-thumbnail image float-left ml-1 mr-1" src="assets/images/lukesky.jpg" alt="Luke Sky"> -->
-                        <div class="init"></div>
+                            <img src = 'assets/images/darkvader.jpg' id = 'vader' class = 'ml-1 mr-1' onclick="rpg.selectPlayer(event)">
+                            <img src = 'assets/images/lukesky.jpg' id = 'luke' class = 'ml-1 mr-1' onclick="rpg.selectPlayer(event)">
+                            <img src = 'assets/images/sith.jpg' id = 'sith' class = 'ml-1 mr-1' onclick="rpg.selectPlayer(event)">
+                            <img src = 'assets/images/oviwan.jpg' id = 'obiWan' class = 'ml-1 mr-1' onclick="rpg.selectPlayer(event)">
                     </div>
                 </div>
 
@@ -67,7 +62,7 @@
 
                             <div class="container enemies">
                                     <div class="row">
-                                            <button type="button" class="btn btn-secondary btn-lg" disabled>Attack !</button>
+                                            <button type="button" class="btn btn-secondary btn-lg" enabled>Attack !</button>
 
                                     </div>
                                 </div>
@@ -90,5 +85,14 @@
     </div>
 
 </body>
+
+<script>
+$(document).ready( function(){
+
+rpg.init();
+
+
+})
+</script>
 
 </html>
