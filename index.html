@@ -19,70 +19,67 @@
 
     <div class="container ">
 
-        
 
-            <div class="row">
-                <h1 class="text-monospace h1"> Star Wars RPG !</h1>
-            </div>
-
-       
 
         <div class="row">
-
-            <div class="col-md-8 test">
-
-                <div class="row init">
-
-                    <!-- <div class="init"></div>
-                    <div class="info"></div> -->
-               
-
-                </div>
-            </div>
+            <h1 class="text-monospace h1"> Star Wars RPG !</h1>
         </div>
+
+
+
+
+
+        <div class="col-md-8 test">
+
+            <div class="row init players">
+
+
+            </div>
+
+
 
             <h1 class="h1">Your Character</h1>
-       
-
-                <div class="row">
-                <div class="playerfield"></div>
-                </div>
-   
 
 
-        <div class="h1">Enemies availables to attack</div>
+            <div class="row">
+                <div class="playerfield cont"></div>
+            </div>
 
-        <div class="row">
 
-            <div class="enemiesfield"></div>
+
+            <div class="h1">Enemies availables to attack</div>
+
+            <div class="row enemiesfield">
+
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="h1">Fight Selection</div>
+
+            </div>
+
+
+            <div class="row">
+                <button type="button" class="btn btn-secondary btn-lg" enabled>Attack !</button>
+
+            </div>
+
+
+            <div class="h1">Defender</div>
+            <div class="row defenderfield">
+
+
+
+            </div>
+
         </div>
-    
-
-
-         <div class="row">
-        <div class="h1">Fight Selection</div>
-  
-        </div>
-
-
-         <div class="row">
-        <button type="button" class="btn btn-secondary btn-lg" enabled>Attack !</button>
-
-        </div>
-    
-
-        <div class="h1">Defender</div>
-        <div class="row">
-
-            <div class="defenderfield"></div>
-
-
-         </div>
-
 
         <div class="col-md-4"></div>
 
-   
+
 
 
     </div>
@@ -94,10 +91,10 @@
 
         rpg.init();
 
-             $(".btn").on("click", function(){
+        $(".btn").on("click", function () {
             console.log(rpg.getdefender());
-        $(".defenderfield").empty();
-        rpg.setdefender(false);
+            $(".defenderfield").empty();
+            rpg.setdefender(false);
         });
 
 
