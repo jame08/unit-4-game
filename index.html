@@ -63,7 +63,7 @@
 
 
             <div class="row">
-                <button type="button" class="btn btn-secondary btn-lg" enabled>Attack !</button>
+                <button type="button" class="btn btn-secondary btn-lg" onclick='rpg.attack(event)' enabled>Attack !</button>
 
             </div>
 
@@ -91,11 +91,7 @@
 
         rpg.init();
 
-        $(".btn").on("click", function () {
-            console.log(rpg.getdefender());
-            $(".defenderfield").empty();
-            rpg.setdefender(false);
-        });
+
 
 
     })

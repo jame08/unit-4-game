@@ -8,11 +8,8 @@ var rpg = (function () {
         enemies:[],
         defender:null,
         characterChosen: false,
-        enemyChosen: false,
         opponent: 0,
         defeated: false,
-        bfchosen: false,
-        defenderselect: false,
 
         enemies:[],
 
@@ -22,7 +19,6 @@ var rpg = (function () {
                 name: "vader",
                 image: "<img src = 'assets/images/darkvader.jpg' id = 'vader' class = 'ml-1 mr-1 var' onclick='rpg.selectPlayer(event)'> ",
                 opImage: "<img src = 'assets/images/darkvader.jpg' id = 'vader' class = 'ml-1 mr-1' onclick='rpg.selectDefender(event)'>",
-                counterAttack: 5,
                 attack: 5,
                 health: 50,
 
@@ -32,7 +28,6 @@ var rpg = (function () {
                 name: "luke",
                 image: "<img src = 'assets/images/lukesky.jpg' id = 'luke' class = 'ml-1 mr-1 var' onclick='rpg.selectPlayer(event)'> ",
                 opImage: "<img src = 'assets/images/lukesky.jpg' id = 'luke' class = 'ml-1 mr-1 ' onclick='rpg.selectDefender(event)'>",
-                counterAttack: 6,
                 attack: 6,
                 health: 80,
 
@@ -42,7 +37,6 @@ var rpg = (function () {
                 name: "sith",
                 image: "<img src = 'assets/images/sith.jpg' id = 'sith' class = 'ml-1 mr-1 var' onclick='rpg.selectPlayer(event)'>",
                 opImage: "<img src = 'assets/images/sith.jpg' id = 'sith' class = 'ml-1 mr-1' onclick='rpg.selectDefender(event)'>",
-                counterAttack: 8,
                 attack: 8,
                 health: 60,
 
@@ -52,7 +46,6 @@ var rpg = (function () {
                 name: "obiWan",
                 image: "<img src = 'assets/images/oviwan.jpg' id = 'obiWan' class = 'ml-1 mr-1 var' onclick='rpg.selectPlayer(event)'>",
                 opImage: "<img src = 'assets/images/oviwan.jpg' id = 'obiWan' class = 'ml-1 mr-1' onclick='rpg.selectDefender(event)'>",
-                counterAttack: 10,
                 attack: 10,
                 health: 40,
 
@@ -112,7 +105,7 @@ var rpg = (function () {
 
         },
 
-        battlefield: function (arg) {
+        battlefield: function () {
             private.enemies.forEach(enemies => {
 
             var stats = "<div class = 'bottom-right'>" + " AP " + enemies.attack + " HP " + enemies.health + " </div> ";
@@ -121,9 +114,32 @@ var rpg = (function () {
 
         },
 
-        attackOponent: function () {
+       attack: function () {
+           
+            if(private.defender && private.player){
 
+            private.defender.health -= private.player.attack;
+            private.player.health -= private.defender.attack;
+            
+                this.refresh();
+
+
+            }
    
+        },
+
+        refresh: function() {
+        
+        $(".playerfield").empty();
+        $(".defenderfield").empty();
+        var stats = "<div class = 'bottom-right'>" + " AP " + private.defender.attack + " HP " + private.defender.health + " </div> ";
+        $(".defenderfield").append( "<div class = 'cont'> "  + private.defender.opImage + stats + "</div>");
+
+        var stats = "<div class = 'bottom-right'>" + " AP " + private.player.attack + " HP " + private.player.health + " </div> ";
+        $(".playerfield").append( "<div class = 'cont'> "  + private.player.image + stats + "</div>");
+
+          
+
         },
 
 
@@ -132,14 +148,7 @@ var rpg = (function () {
 
         },
 
-        setdefender: function(arg) {
-
-            private.defender = arg;
-        },
-        getdefender: function(){
-            return private.defender;
-        }
-
+    
 
        
 
