@@ -8,7 +8,7 @@ var rpg = (function () {
         enemies:[],
         defender:null,
         characterChosen: false,
-        opponent: 0,
+       defenderleft: 3,
         defeated: false,
 
         enemies:[],
@@ -20,7 +20,7 @@ var rpg = (function () {
                 image: "<img src = 'assets/images/darkvader.jpg' id = 'vader' class = 'ml-1 mr-1 var' onclick='rpg.selectPlayer(event)'> ",
                 opImage: "<img src = 'assets/images/darkvader.jpg' id = 'vader' class = 'ml-1 mr-1' onclick='rpg.selectDefender(event)'>",
                 attack: 5,
-                health: 50,
+                health: 60,
 
             },
 
@@ -29,7 +29,7 @@ var rpg = (function () {
                 image: "<img src = 'assets/images/lukesky.jpg' id = 'luke' class = 'ml-1 mr-1 var' onclick='rpg.selectPlayer(event)'> ",
                 opImage: "<img src = 'assets/images/lukesky.jpg' id = 'luke' class = 'ml-1 mr-1 ' onclick='rpg.selectDefender(event)'>",
                 attack: 6,
-                health: 80,
+                health: 70,
 
             },
 
@@ -37,7 +37,7 @@ var rpg = (function () {
                 name: "sith",
                 image: "<img src = 'assets/images/sith.jpg' id = 'sith' class = 'ml-1 mr-1 var' onclick='rpg.selectPlayer(event)'>",
                 opImage: "<img src = 'assets/images/sith.jpg' id = 'sith' class = 'ml-1 mr-1' onclick='rpg.selectDefender(event)'>",
-                attack: 8,
+                attack: 7,
                 health: 60,
 
             },
@@ -47,7 +47,7 @@ var rpg = (function () {
                 image: "<img src = 'assets/images/oviwan.jpg' id = 'obiWan' class = 'ml-1 mr-1 var' onclick='rpg.selectPlayer(event)'>",
                 opImage: "<img src = 'assets/images/oviwan.jpg' id = 'obiWan' class = 'ml-1 mr-1' onclick='rpg.selectDefender(event)'>",
                 attack: 10,
-                health: 40,
+                health: 50,
 
             }
         ],
@@ -91,7 +91,7 @@ var rpg = (function () {
 
         selectDefender: function (arg) {
 
-            console.log(arg.target.id);
+            console.log(arg);
            
         if(private.defender === null){
            
@@ -118,14 +118,43 @@ var rpg = (function () {
            
             if(private.defender && private.player){
 
+            
             private.defender.health -= private.player.attack;
             private.player.health -= private.defender.attack;
-            
-                this.refresh();
+            private.player.attack += 5 ;
+            this.refresh();
+            this.gamestate();
 
 
             }
    
+        },
+
+        gamestate: function(){
+
+            if(private.player.health < 1){
+                
+                 
+            }
+
+
+            if(private.defender.health < 1 && private.defenderleft > 0){
+                private.defender = null;
+                private.defenderleft-= 1;
+                console.log(private.defenderleft);
+                $(".defenderfield").empty();
+                addEventListener.selectDefender;
+                
+                if(private.defenderleft === 0){
+                    this.reset();
+                }
+            
+            }
+
+           
+
+         
+            
         },
 
         refresh: function() {
@@ -134,7 +163,6 @@ var rpg = (function () {
         $(".defenderfield").empty();
         var stats = "<div class = 'bottom-right'>" + " AP " + private.defender.attack + " HP " + private.defender.health + " </div> ";
         $(".defenderfield").append( "<div class = 'cont'> "  + private.defender.opImage + stats + "</div>");
-
         var stats = "<div class = 'bottom-right'>" + " AP " + private.player.attack + " HP " + private.player.health + " </div> ";
         $(".playerfield").append( "<div class = 'cont'> "  + private.player.image + stats + "</div>");
 
@@ -143,8 +171,12 @@ var rpg = (function () {
         },
 
 
+ 
 
         reset: function () {
+            alert("You defeated the enemies. Hit ok to play again");
+
+            location.reload();
 
         },
 
