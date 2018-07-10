@@ -1,9 +1,15 @@
 
 
 var rpg = (function () {
+    
+    
+
+  
 
     var private = {
 
+        
+        
         player: null,
         enemies:[],
         defender:null,
@@ -57,11 +63,12 @@ var rpg = (function () {
     };
 
     return {
+       
 
 
         init: function () {
 
-
+       
             private.characters.forEach(player => {
 
                 var stats = "<div class = 'bottom-right'>" + " AP " + player.attack + " HP " + player.health + " </div> ";
@@ -115,8 +122,10 @@ var rpg = (function () {
         },
 
        attack: function () {
-           
+        var saberSounds = ["assets/sounds/saber2.mp3", "assets/sounds/saber3.mp3", "assets/sounds/saber4.mp3"]
+		var sound = new Audio (saberSounds[Math.floor(Math.random()*saberSounds.length)]);
             if(private.defender && private.player){
+            sound.play;
 
             
             private.defender.health -= private.player.attack;
@@ -132,13 +141,17 @@ var rpg = (function () {
 
         gamestate: function(){
 
+            
+
             if(private.player.health < 1){
                 
-                 
+                 alert("looser")
+                 this.reset();
             }
 
 
             if(private.defender.health < 1 && private.defenderleft > 0){
+              
                 private.defender = null;
                 private.defenderleft-= 1;
                 console.log(private.defenderleft);
@@ -174,11 +187,11 @@ var rpg = (function () {
  
 
         reset: function () {
-            alert("You defeated the enemies. Hit ok to play again");
 
             location.reload();
 
         },
+
 
     
 
@@ -193,7 +206,15 @@ var rpg = (function () {
 
 })();
 
+$(document).ready(function () {
+ 
 
+    rpg.init();
+    
+
+
+
+})
 
 
 
