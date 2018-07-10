@@ -63,16 +63,12 @@ var rpg = (function () {
     };
 
     return {
-       
-
 
         init: function () {
 
-       
             private.characters.forEach(player => {
-
-                var stats = "<div class = 'bottom-right'>" + " AP " + player.attack + " HP " + player.health + " </div> ";
-                $(".init").append("<div class = 'cont'> "+ player.image +  stats +"</div>");
+               
+                $(".init").append(this.stats(player.attack,player.health,player.image));
             
             })
 
@@ -83,18 +79,13 @@ var rpg = (function () {
                 
                 private.player = private.characters.find(x => x.name === arg.target.id);
                 private.enemies = private.characters.filter(x => x.name != arg.target.id);
-                var stats = "<div class = 'bottom-right'>" + " AP " + private.player.attack + " HP " + private.player.health + " </div> ";
                 $("div.players").empty();
-                $(".playerfield").html(arg.target.outerHTML + stats);
-
-
+                $(".playerfield").html(this.stats(private.player.attack,private.player.health,arg.target.outerHTML));
                 this.battlefield(private.enemies);
                  
             }     
 
         },
-
-
 
         selectDefender: function (arg) {
 
@@ -104,8 +95,7 @@ var rpg = (function () {
            
             private.defender = private.enemies.find(x => x.name === arg.target.id);
             private.enemies = private.enemies.filter(x => x.name != arg.target.id);
-            var stats = "<div class = 'bottom-right'>" + " AP " + private.defender.attack + " HP " + private.defender.health + " </div> ";
-            $(".defenderfield").append("<div class = 'cont'>"+ private.defender.image + stats + "</div>" );
+            $(".defenderfield").append(this.stats(private.defender.attack,private.defender.health,private.defender.image));
             $(".enemiesfield").empty();
             this.battlefield();
         }
@@ -114,9 +104,7 @@ var rpg = (function () {
 
         battlefield: function () {
             private.enemies.forEach(enemies => {
-
-            var stats = "<div class = 'bottom-right'>" + " AP " + enemies.attack + " HP " + enemies.health + " </div> ";
-            $(".enemiesfield").append( "<div class = 'cont'> "  + enemies.opImage + stats + "</div>");
+            $(".enemiesfield").append(this.stats(enemies.attack,enemies.health,enemies.opImage));
          } )
 
         },
@@ -126,22 +114,17 @@ var rpg = (function () {
 		var sound = new Audio (saberSounds[Math.floor(Math.random()*saberSounds.length)]);
             if(private.defender && private.player){
             sound.play;
-
-            
             private.defender.health -= private.player.attack;
             private.player.health -= private.defender.attack;
             private.player.attack += 5 ;
             this.refresh();
             this.gamestate();
 
-
             }
    
         },
 
         gamestate: function(){
-
-            
 
             if(private.player.health < 1){
                 
@@ -163,46 +146,30 @@ var rpg = (function () {
                 }
             
             }
-
-           
-
-         
-            
         },
 
         refresh: function() {
         
         $(".playerfield").empty();
         $(".defenderfield").empty();
-        var stats = "<div class = 'bottom-right'>" + " AP " + private.defender.attack + " HP " + private.defender.health + " </div> ";
-        $(".defenderfield").append( "<div class = 'cont'> "  + private.defender.opImage + stats + "</div>");
-        var stats = "<div class = 'bottom-right'>" + " AP " + private.player.attack + " HP " + private.player.health + " </div> ";
-        $(".playerfield").append( "<div class = 'cont'> "  + private.player.image + stats + "</div>");
-
-          
+        $(".defenderfield").append(this.stats(private.defender.attack,private.defender.health,private.defender.opImage));
+        $(".playerfield").append(this.stats(private.player.attack,private.player.health,private.player.image) );     
 
         },
 
+        stats: function(arg1,arg2,arg3) {
 
- 
+           var stats = "<div class = 'bottom-right'>" + " AP " + arg1 + " HP " + arg2 + " </div> ";
+           return "<div class = 'cont'> "  + arg3 + stats + "</div>";
+
+        },
 
         reset: function () {
 
             location.reload();
 
         },
-
-
-    
-
-       
-
-
-
-
     };
-
-
 
 })();
 
