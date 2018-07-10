@@ -2,13 +2,7 @@
 
 var rpg = (function () {
     
-    
-
-  
-
     var private = {
-
-        
         
         player: null,
         enemies:[],
@@ -58,11 +52,11 @@ var rpg = (function () {
             }
         ],
 
-        //private functions 
-
     };
 
     return {
+
+        
 
         init: function () {
 
@@ -89,7 +83,6 @@ var rpg = (function () {
 
         selectDefender: function (arg) {
 
-            console.log(arg);
            
         if(private.defender === null){
            
@@ -110,11 +103,9 @@ var rpg = (function () {
         },
 
        attack: function () {
-        var saberSounds = ["assets/sounds/saber2.mp3", "assets/sounds/saber3.mp3", "assets/sounds/saber4.mp3"]
-		var sound = new Audio (saberSounds[Math.floor(Math.random()*saberSounds.length)]);
             if(private.defender && private.player){
-            sound.play;
             private.defender.health -= private.player.attack;
+            this.gamestate();
             private.player.health -= private.defender.attack;
             private.player.attack += 5 ;
             this.refresh();
@@ -142,6 +133,7 @@ var rpg = (function () {
                 addEventListener.selectDefender;
                 
                 if(private.defenderleft === 0){
+                    alert("You won");
                     this.reset();
                 }
             
@@ -157,10 +149,10 @@ var rpg = (function () {
 
         },
 
-        stats: function(arg1,arg2,arg3) {
+        stats: function(att,hel,ima) {
 
-           var stats = "<div class = 'bottom-right'>" + " AP " + arg1 + " HP " + arg2 + " </div> ";
-           return "<div class = 'cont'> "  + arg3 + stats + "</div>";
+           var stats = "<div class = 'bottom-right'>" + " AP " + att + " HP " + hel + " </div> ";
+           return "<div class = 'cont'> "  + ima + stats + "</div>";
 
         },
 
