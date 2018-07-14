@@ -20,7 +20,7 @@ var rpg = (function () {
                 image: "<img src = 'assets/images/darkvader.jpg' id = 'vader' class = 'ml-1 mr-1 var' onclick='rpg.selectPlayer(event)'> ",
                 opImage: "<img src = 'assets/images/darkvader.jpg' id = 'vader' class = 'ml-1 mr-1' onclick='rpg.selectDefender(event)'>",
                 attack: 5,
-                health: 60,
+                health: 55,
 
             },
 
@@ -29,7 +29,7 @@ var rpg = (function () {
                 image: "<img src = 'assets/images/lukesky.jpg' id = 'luke' class = 'ml-1 mr-1 var' onclick='rpg.selectPlayer(event)'> ",
                 opImage: "<img src = 'assets/images/lukesky.jpg' id = 'luke' class = 'ml-1 mr-1 ' onclick='rpg.selectDefender(event)'>",
                 attack: 6,
-                health: 70,
+                health: 60,
 
             },
 
@@ -54,18 +54,13 @@ var rpg = (function () {
 
     };
 
-    return {
-
-        
+    return { 
 
         init: function () {
 
             private.characters.forEach(player => {
-               
-                $(".init").append(this.stats(player.attack,player.health,player.image));
-            
+                $(".init").append(this.stats(player.attack,player.health,player.image)); 
             })
-
         },
 
         selectPlayer: function (arg) {
@@ -78,7 +73,6 @@ var rpg = (function () {
                 this.battlefield(private.enemies);
                  
             }     
-
         },
 
         selectDefender: function (arg) {
@@ -112,7 +106,6 @@ var rpg = (function () {
             this.gamestate();
 
             }
-   
         },
 
         gamestate: function(){
@@ -122,7 +115,6 @@ var rpg = (function () {
                  alert("looser")
                  this.reset();
             }
-
 
             if(private.defender.health < 1 && private.defenderleft > 0){
               
@@ -136,7 +128,6 @@ var rpg = (function () {
                     alert("You won");
                     this.reset();
                 }
-            
             }
         },
 
